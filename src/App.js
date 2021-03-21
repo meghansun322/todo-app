@@ -6,8 +6,7 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
-
-import { Task } from "./components";
+import {Task} from "./components"
 
 /**
  * TODO:
@@ -21,7 +20,7 @@ const App = () => {
   // I've already added currTask for you as an example of useState!
   const [currTask, setCurrTask] = useState("");
   // follow this example above & with the useState hook, create a variable called tasks. its default value is an empty array []
-
+  const [tasks, setTasks] = useState([]);
   /**
    * TODO: create a regular function called handleInput that takes in a parameter called event & updates currTask
    * using setCurrTask
@@ -29,8 +28,13 @@ const App = () => {
    * event belongs to the FormControl element, which is where the task is being inputed. We want to find where in the event object, the string
    * value entered by the user is being stored. In this case, it's stored here: event.target.value
    */
+
+  
   const handleInput = (event) => {
-    event.preventDefault(); // this prevents the page from refreshing when the button is clicked
+    setCurrTask(event.target.value);
+    event.preventDefault(); 
+    
+      // this prevents the page from refreshing when the button is clicked
     // TODO: call setCurrTask and pass it the string the user inputed
   };
 
@@ -42,7 +46,14 @@ const App = () => {
    *          const new_array = [...old_array, "wow"] (we're adding the string "wow")
    *          console.log(new_array) -> ["hi", "bye", "wow"]
    */
-  const addTask = () => {};
+  const addTask = () => {
+    const updatedTask = [...tasks, currTask];
+    setTasks(updatedTask)
+    
+
+
+
+  };
 
   return (
     <div className="home">
@@ -55,18 +66,19 @@ const App = () => {
              * 1. placeholder (string) -> pass a string explaining what the input is for (ex: "Enter a task!")
              * 2. onChange (function) -> pass one of the functions above that handles the user's input
              */}
-            <FormControl />
+  
+            <FormControl placeholder="Enter a Tasks!" onChange={handleInput}/>
             <InputGroup.Append>
               {/** TODO: Add a prop & add some text to the button
                * 1. onClick (function) -> pass one of the functions above that handles a task being added
                * 2. Add text between the open and closing button tags, describing what the button should say
                */}
-              <Button></Button>
+              <Button onClick={addTask}>Add a task</Button>
             </InputGroup.Append>
           </Form.Group>
         </Form>
         {/*using your tasks array, map through it and pass each task string to the Task component via the name prop*/}
-        {tasks.map((task) => {})}
+        {tasks.map((task) => <Task name={task}/>)}
       </div>
     </div>
   );

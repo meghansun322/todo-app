@@ -1,11 +1,20 @@
+
 import React from "react";
+import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const Task = ({ name }) => {
   return (
     <div>
-      {/**
-       * TODO: add an html or bootstrap element that uses the name variable to display an individual task
-       */}
+      <ListGroup >
+        <ListGroup.Item variant="info"> 
+           {name}
+        </ListGroup.Item>
+      </ListGroup> 
+
+      
+
+      
+      
     </div>
   );
 };
